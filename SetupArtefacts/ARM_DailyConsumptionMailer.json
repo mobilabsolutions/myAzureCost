@@ -135,7 +135,7 @@
                     "url": "[concat(parameters('_artifactsLocation'), '/RunBk_GetUsageAggregates.ps1', parameters('_artifactsLocationSasToken'))]",
                     "version": "1.0.0.0",
                     "type": "PowerShell",
-                    "description": "Runbook to gather azure consumption of the day.",
+                    "description": "Runbook to gather azure consumption of the last month.",
                     "linkedToSchedule": "monthly",
                     "parameters": {
                         "tagLabel": "ms-resource-usage",
@@ -149,6 +149,18 @@
                     "type": "PowerShell",
                     "description": "Runbook to create a table after the deployment.",
                     "linkedToSchedule": ""
+                },
+                {
+                    "name": "RunBk_FillTable",
+                    "url": "[concat(parameters('_artifactsLocation'), '/RunBk_FillTable.ps1', parameters('_artifactsLocationSasToken'))]",
+                    "version": "1.0.0.0",
+                    "type": "PowerShell",
+                    "description": "Runbook to fill the table with the costs of the last month.",
+                    "linkedToSchedule": "monthly",
+                    "parameters": {
+                        "tagLabel": "ms-resource-usage",
+                        "tagValue": "azure-cloud-shell"
+                    }
                 },
                 {
                     "name": "RunBk_SendCostEmail",
