@@ -12,7 +12,7 @@ $year = $date.Year
 $month = $date.Month
 
 $startOfMonth = Get-Date -Year $year -Month $month -Day 1 -Hour 0 -Minute 0 -Second 0 -Millisecond 0
-$endOfMonth = $startOfMonth.AddMonths(1).AddDays(-1).AddHours(23)
+$endOfMonth = $startOfMonth.AddMonths(1).AddDays(-1).AddHours(24)
 
 $ConsumptionDate = $startOfMonth
 $EndDate = $endOfMonth
