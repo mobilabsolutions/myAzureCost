@@ -136,7 +136,7 @@
                     "version": "1.0.0.0",
                     "type": "PowerShell",
                     "description": "Runbook to gather azure consumption of the day.",
-                    "linkedToSchedule": "monthly",
+                    "linkedToSchedule": "monthlyReport",
                     "parameters": {
                         "tagLabel": "ms-resource-usage",
                         "tagValue": "azure-cloud-shell"
@@ -156,7 +156,7 @@
                     "version": "1.0.0.0",
                     "type": "PowerShell",
                     "description": "Runbook to calculate costs and send them as email (via sendgrid).",
-                    "linkedToSchedule": ""
+                    "linkedToSchedule": "monthlyEmail"
                 },
                 {
                     "name": "RunBk_SendUsageEmail",
@@ -188,7 +188,18 @@
             ],
             "schedules": [
                 {
-                    "name": "monthly",
+                    "name": "monthlyReport",
+                    "startTime": "[dateTimeAdd(parameters('baseTime'),'P1DT8H30M')]",
+                    "expiryTime": "9999-12-31T23:59:59.9999999+00:00",
+                    "interval": 1,
+                    "frequency": "Month",
+                    "timeZone": "UTC",
+                    "advancedSchedule": {
+                        "monthDays": [1]
+                    }
+                },
+                {
+                    "name": "monthlyEmail",
                     "startTime": "[dateTimeAdd(parameters('baseTime'),'P1DT8H30M')]",
                     "expiryTime": "9999-12-31T23:59:59.9999999+00:00",
                     "interval": 1,
