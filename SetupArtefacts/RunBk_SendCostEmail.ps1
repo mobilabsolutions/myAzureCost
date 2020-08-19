@@ -175,18 +175,6 @@ $top3ConsumersPerCat | ft InstanceName, 'Estimated Costs', MeterCategory -AutoSi
 #region get history data from table
 $cloudTable = (Get-AzStorageTable –Name $tableName –Context $ctx).CloudTable
 
-#update or new
-try {
-    $entry = Get-AzTableRow -Table $cloudTable -PartitionKey $ConsumptionDate.ToString('MMMM') -rowKey "$($ConsumptionDate.ToString('dd'))"
-    $entry.TotalCost = "{0:N2}" -f $totalCost
-    $entry.Year = $ConsumptionDate.Year
-    $entry | Update-AzTableRow -table $cloudTable
-}
-catch {
-    Add-AzTableRow -table $cloudTable -partitionKey $ConsumptionDate.ToString('MMMM') `
-        -rowKey "$($ConsumptionDate.ToString('dd'))" -property @{"TotalCost" = $("{0:N2}" -f $totalCost); "Year" = $ConsumptionDate.Year }
-}
-
 Get-AzTableRow -Table $cloudTable -PartitionKey $ConsumptionDate.ToString('MMMM') -rowKey "$($ConsumptionDate.ToString('dd'))"
 #Get last month
 $lastMonth = @()
