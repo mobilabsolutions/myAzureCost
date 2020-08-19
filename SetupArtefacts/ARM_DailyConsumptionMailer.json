@@ -148,7 +148,8 @@
                     "version": "1.0.0.0",
                     "type": "PowerShell",
                     "description": "Runbook to create a table after the deployment.",
-                    "linkedToSchedule": ""
+                    "linkedToSchedule": "",
+                    "parameters": {}
                 },
                 {
                     "name": "RunBk_FillTable",
@@ -168,7 +169,8 @@
                     "version": "1.0.0.0",
                     "type": "PowerShell",
                     "description": "Runbook to calculate costs and send them as email (via sendgrid).",
-                    "linkedToSchedule": "monthlyEmail"
+                    "linkedToSchedule": "monthlyEmail",
+                    "parameters": {}
                 },
                 {
                     "name": "RunBk_SendUsageEmail",
@@ -176,7 +178,8 @@
                     "version": "1.0.0.0",
                     "type": "PowerShell",
                     "description": "Send consumption as .csv attached to an email (via sendgrid).",
-                    "linkedToSchedule": ""
+                    "linkedToSchedule": "",
+                    "parameters": {}
                 }
 
             ],
@@ -339,10 +342,7 @@
                 "schedule": {
                     "name": "[variables('AA').runbooks[copyIndex()].linkedToSchedule]"
                 },
-                "parameters": {
-                   "tagLabel": "[variables('AA').runbooks[copyIndex()].parameters.tagLabel]",
-                   "tagValue": "[variables('AA').runbooks[copyIndex()].parameters.tagValue]"
-                }
+                "parameters": "[variables('AA').runbooks[copyIndex()].parameters]"
             }
         },
         {
