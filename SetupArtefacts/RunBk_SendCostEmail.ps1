@@ -190,9 +190,9 @@ catch {
 Get-AzTableRow -Table $cloudTable -PartitionKey $ConsumptionDate.ToString('MMMM') -rowKey "$($ConsumptionDate.ToString('dd'))"
 #Get last month
 $lastMonth = @()
-#for ($date = $ConsumptionDate; $date -le $EndDate; $date += [System.timespan]::new(1, 0, 0, 0)) { 
-    $lastMonth += Get-AzTableRow -Table $cloudTable -PartitionKey $ConsumptionDate.ToString('MMMM') -rowKey "$($ConsumptionDate.ToString('dd'))"
-#}
+for ($date = $ConsumptionDate; $date -le $EndDate; $date += [System.timespan]::new(1, 0, 0, 0)) { 
+    $lastMonth += Get-AzTableRow -Table $cloudTable -PartitionKey $date.ToString('MMMM') -rowKey "$($date.ToString('dd'))"
+}
 
 $lastMonth | ft RowKey, PartitionKey, Year, TotalCost
 
