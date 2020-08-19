@@ -117,10 +117,10 @@ foreach ($usageEntry in $usageEntries) {
 
 # reporting section
 "========================"
-"You have {0} items on your daily consumption list." -f $($costEntries.Count) 
+"You have {0} items on your monthly consumption list." -f $($costEntries.Count) 
 "========================"
 $totalCost = $($costEntries | Measure-Object 'Estimated Costs' -Sum).Sum
-"They sum up to {0} in total for the day" -f $totalCost
+"They sum up to {0} in total for the month" -f $totalCost
 "========================"
 
 #region total costs per category
@@ -276,7 +276,7 @@ $htmlBody = @"
 <p>This is your monthly report for subscription: <b>$subscriptionName</b>.</p>
 <p>Date range: <b>$($ConsumptionDate.ToString("dd'/'MM'/'yyyy",$destculture)) - $($EndDate.ToString("dd'/'MM'/'yyyy",$destculture))</b>.</p>
 <p>You have <b>$("{0}" -f $($costEntries.Count)) items</b> on your montly consumption list.<br>
-They sum up to <b>$("{0:N2}" -f $totalCost)</b> in total for the day.</p>
+They sum up to <b>$("{0:N2}" -f $totalCost)</b> in total for the month.</p>
 "@
 $htmlBody += "<p><h3>Costs History:</h3>"
 $htmlBody += "<table style=""width:auto; height: auto;""><tr><td><img src='cid:costHistoryChart'></td><td>"
